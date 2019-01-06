@@ -1,4 +1,4 @@
-service: kairoscope-journal
+service: kairoscope-unattached-journal
 
 plugins:
   - serverless-pseudo-parameters # Read the region and accout id
@@ -34,7 +34,7 @@ provider:
     log_level: ${self:custom.logLevel.${self:custom.stage}, self:custom.logLevel.default} # The variable for the log function
     STAGE: ${self:custom.stage} # For DEFAULT_CONTEXT in log.js
     FUNCTION_SHIELD_TOKEN: ${ssm:/kairoscope/${self:custom.stage}/function_shield_token} # For using the Function Shield
-    journalEntriesCollectionName: ${ssm:/kairoscope/${self:custom.stage}/readings-collection-name}
+    journalEntriesCollectionName: ${ssm:/kairoscope/${self:custom.stage}/journal-entries-collection-name}
     jwtName: ${ssm:/kairoscope/${self:custom.stage}/jwt-name}
     ADMINISTRATOR_ROLE: 1
   iamRoleStatements:
@@ -57,4 +57,13 @@ provider:
       Resource: arn:aws:ssm:#{AWS::Region}:#{AWS::AccountId}:parameter/kairoscope/${self:custom.stage}/*
 
 functions:
-  
+  fetch-unatteched-journal:
+    handler: functions/fetch-unattached-journal.handler
+    events:
+      - http:
+          path: /unattachedJournal
+          method: get
+          cors: true
+    memorySize: 512
+    environment:
+      async_metrics: true # Use this variable to control whether send the metrics to CloudWatch Async      
