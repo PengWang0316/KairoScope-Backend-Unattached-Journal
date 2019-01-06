@@ -1,7 +1,7 @@
 {
-  "name": "reading-service",
+  "name": "unattached-journal-service",
   "version": "1.0.0",
-  "description": "The microservice for KairoScope. This is the service that is in charge of reading's operations.",
+  "description": "The microservice for KairoScope. This is the service that is in charge of unattached journal's operations.",
   "main": "index.js",
   "scripts": {
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
@@ -9,7 +9,7 @@
     "unitTestWatch": "jest  __tests__/unit_tests/* --watch",
     "unitTestCoverage": "jest  __tests__/unit_tests/* --coverage",
     "integrationTest": "env AWS_XRAY_CONTEXT_MISSING=LOG_ERROR TEST_MODE=integration jest __tests__/test_cases/* --forceExit",
-    "acceptanceTest": "env TEST_MODE=acceptance TEST_ROOT=https://b8bpiar0bh.execute-api.us-west-2.amazonaws.com/dev jest __tests__/test_cases/*"
+    "acceptanceTest": "env TEST_MODE=acceptance TEST_ROOT=https://xbfdcju8sf.execute-api.us-west-2.amazonaws.com/dev jest __tests__/test_cases/*"
   },
   "author": "Kevin W.",
   "license": "MIT",
