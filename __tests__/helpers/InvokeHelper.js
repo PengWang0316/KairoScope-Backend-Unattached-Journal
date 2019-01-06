@@ -69,7 +69,10 @@ const viaHandler = (handlerName, event = {}, context = {}) => {
   });
 };
 
+const invokeFetchUnattachedJournal = (event, context) => isIntegrationTest
+  ? viaHandler('fetch-unattached-journal', event, context)
+  : viaHttp(`unattachedJournal?journalId=${event.queryStringParameters.journalId}`, { iam: false, isJwt: true });
 
 module.exports = {
-  
+  invokeFetchUnattachedJournal,
 };
