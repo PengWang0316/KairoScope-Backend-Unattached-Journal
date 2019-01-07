@@ -10,7 +10,7 @@ jest.mock('../../middlewares/wrapper', () => functionHandler => functionHandler)
 jest.mock('../../libs/MongoDBHelper', () => ({
   promiseNextResult: jest.fn().mockImplementation(cb => cb({ collection: mockCollection })),
 }));
-// jest.mock('../../libs/log', () => ({ error: jest.fn() }));
+jest.mock('../../libs/log', () => ({ error: jest.fn() }));
 jest.mock('../../libs/cloudwatch', () => ({ trackExecTime: jest.fn().mockImplementation((name, func) => func()) }));
 
 describe('fetch-unattached-journal', () => {
@@ -22,6 +22,7 @@ describe('fetch-unattached-journal', () => {
     const callback = jest.fn();
     const mongodb = require('../../libs/MongoDBHelper');
     const cloudwatch = require('../../libs/cloudwatch');
+    const log = require('../../libs/log');
 
     await handler(event, context, callback);
 
@@ -35,5 +36,25 @@ describe('fetch-unattached-journal', () => {
     );
     expect(callback).toHaveBeenCalledTimes(1);
     expect(callback).toHaveBeenLastCalledWith(null, { statusCode: 200, body: JSON.stringify(findReturnValue) });
+    expect(log.error).not.toHaveBeenCalled();
+  });
+
+  test('Verified user calls with error', async () => {
+    const event = { queryStringParameters: { journalId: '5c2be5a983e41424f9943add' } };
+    const context = {
+      user: { _id: 'id' },
+      functionName: 'functionName',
+    };
+    const callback = jest.fn();
+    const cloudwatch = require('../../libs/cloudwatch');
+    cloudwatch.trackExecTime.mockRejectedValueOnce('Error Message');
+    const log = require('../../libs/log');
+
+    await handler(event, context, callback);
+
+    expect(callback).toHaveBeenCalledTimes(1);
+    expect(callback).toHaveBeenLastCalledWith(null, { statusCode: 500 });
+    expect(log.error).toHaveBeenCalledTimes(1);
+    expect(log.error).toHaveBeenLastCalledWith(`${context.functionName} has an error message: Error Message`);
   });
 });
