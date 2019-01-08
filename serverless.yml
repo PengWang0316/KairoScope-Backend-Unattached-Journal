@@ -57,7 +57,7 @@ provider:
       Resource: arn:aws:ssm:#{AWS::Region}:#{AWS::AccountId}:parameter/kairoscope/${self:custom.stage}/*
 
 functions:
-  fetch-unatteched-journal:
+  fetch-unattached-journal:
     handler: functions/fetch-unattached-journal.handler
     events:
       - http:
@@ -68,7 +68,7 @@ functions:
     environment:
       async_metrics: true # Use this variable to control whether send the metrics to CloudWatch Async
 
-  fetch-unatteched-journals:
+  fetch-unattached-journals:
     handler: functions/fetch-unattached-journals.handler
     events:
       - http:
@@ -79,7 +79,7 @@ functions:
     environment:
       async_metrics: true
 
-  delete-unatteched-journal:
+  delete-unattached-journal:
     handler: functions/delete-unattached-journal.handler
     events:
       - http:
