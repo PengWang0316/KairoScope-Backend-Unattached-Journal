@@ -78,3 +78,14 @@ functions:
     memorySize: 512
     environment:
       async_metrics: true
+
+  delete-unatteched-journal:
+    handler: functions/delete-unattached-journal.handler
+    events:
+      - http:
+          path: /unattachedJournal
+          method: delete
+          cors: true
+    memorySize: 512
+    environment:
+      async_metrics: true
