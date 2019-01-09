@@ -21,19 +21,14 @@
       "__tests__/debug_events/"
     ]
   },
-  "dependencies": {
-    "@puresec/function-shield": "^1.2.2",
-    "aws-xray-sdk": "^2.1.0",
-    "jsonwebtoken": "^8.4.0",
-    "middy": "^0.19.4",
-    "mongo-sanitize": "^1.0.1",
-    "mongodb": "^3.1.10"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/runtime": "^7.2.0",
+    "@puresec/function-shield": "^1.2.2",
     "aws-sdk": "^2.369.0",
+    "aws-xray-sdk": "^2.1.0",
     "aws4": "^1.8.0",
     "awscred": "^1.4.2",
     "axios": "^0.18.0",
@@ -49,6 +44,10 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "jest": "^23.6.0",
+    "jsonwebtoken": "^8.4.0",
+    "middy": "^0.20.0",
+    "mongo-sanitize": "^1.0.1",
+    "mongodb": "^3.1.10",
     "serverless": "^1.35.1",
     "serverless-iam-roles-per-function": "^1.0.4",
     "serverless-plugin-aws-alerts": "^1.2.4",
