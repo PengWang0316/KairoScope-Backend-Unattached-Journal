@@ -75,9 +75,14 @@ const invokeFetchUnattachedJournal = (event, context) => isIntegrationTest
 
 const invokeFetchUnattachedJournals = (event, context) => isIntegrationTest
   ? viaHandler('fetch-unattached-journals', event, context)
-  : viaHttp(`unattachedJournals?`, { iam: false, isJwt: true });
+  : viaHttp('unattachedJournals?', { iam: false, isJwt: true });
+
+const invokeDeleteUnattachedJournal = (event, context) => isIntegrationTest
+  ? viaHandler('delete-unattached-journal', event, context)
+  : viaHttp(`unattachedJournal?journalId=${event.queryStringParameters.journalId}&jwtMessage=${event.queryStringParameters.jwtMessage}`, { iam: false, isJwt: false }, 'delete');
 
 module.exports = {
   invokeFetchUnattachedJournal,
   invokeFetchUnattachedJournals,
+  invokeDeleteUnattachedJournal,
 };
