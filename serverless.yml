@@ -61,6 +61,13 @@ provider:
     #   Action: lambda:GetLayerVersion
     #   Resource: '*'
 
+package:
+  exclude:
+    - coverage/**
+    - __tests__/**
+    - build*
+    - Information.txt
+
 functions:
   fetch-unattached-journal:
     handler: functions/fetch-unattached-journal.handler
