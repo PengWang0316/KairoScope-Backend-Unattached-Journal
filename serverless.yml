@@ -55,6 +55,18 @@ provider:
     - Effect: Allow
       Action: ssm:GetParameters*
       Resource: arn:aws:ssm:#{AWS::Region}:#{AWS::AccountId}:parameter/kairoscope/${self:custom.stage}/*
+    
+    #  # Give the function permission to use layers (Do not really need it)
+    # - Effect: Allow
+    #   Action: lambda:GetLayerVersion
+    #   Resource: '*'
+
+package:
+  exclude:
+    - coverage/**
+    - __tests__/**
+    - build*
+    - Information.txt
 
 functions:
   fetch-unattached-journal:
@@ -67,6 +79,8 @@ functions:
     memorySize: 512
     environment:
       async_metrics: true # Use this variable to control whether send the metrics to CloudWatch Async
+    layers:
+      - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
 
   fetch-unattached-journals:
     handler: functions/fetch-unattached-journals.handler
@@ -78,6 +92,8 @@ functions:
     memorySize: 512
     environment:
       async_metrics: true
+    layers:
+      - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
 
   delete-unattached-journal:
     handler: functions/delete-unattached-journal.handler
@@ -89,3 +105,5 @@ functions:
     memorySize: 512
     environment:
       async_metrics: true
+    layers:
+      - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
