@@ -107,3 +107,16 @@ functions:
       async_metrics: true
     layers:
       - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
+
+  create-journal:
+    handler: functions/create-journal.handler
+    events:
+      - http:
+          path: /journal
+          method: post
+          cors: true
+    memorySize: 512
+    environment:
+      async_metrics: true
+    layers:
+      - ${cf:lambda-layers-dev.KairoscopeDependenciesLayerExport}
