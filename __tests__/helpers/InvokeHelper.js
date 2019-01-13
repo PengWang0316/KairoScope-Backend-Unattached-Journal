@@ -81,8 +81,14 @@ const invokeDeleteUnattachedJournal = (event, context) => isIntegrationTest
   ? viaHandler('delete-unattached-journal', event, context)
   : viaHttp(`unattachedJournal?journalId=${event.queryStringParameters.journalId}&jwtMessage=${event.queryStringParameters.jwtMessage}`, { iam: false, isJwt: false }, 'delete');
 
+// A customized fake jwt message is used to isolate this test case from others
+const invokeCreateJournal = (event, context) => isIntegrationTest
+? viaHandler('create-journal', event, context)
+: viaHttp(`journal`, { iam: false, isJwt: false, body: JSON.parse(event.body) }, 'post');
+
 module.exports = {
   invokeFetchUnattachedJournal,
   invokeFetchUnattachedJournals,
   invokeDeleteUnattachedJournal,
+  invokeCreateJournal,
 };
