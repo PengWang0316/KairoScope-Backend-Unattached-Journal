@@ -6,11 +6,11 @@ const mockDeleteOne = jest.fn();
 const mockCollection = jest.fn().mockReturnValue({ deleteOne: mockDeleteOne });
 
 jest.mock('../../middlewares/wrapper', () => functionHandler => functionHandler);
-jest.mock('../../libs/MongoDBHelper', () => ({
+jest.mock('@kevinwang0316/mongodb-helper', () => ({
   promiseInsertResult: jest.fn().mockImplementation(cb => cb({ collection: mockCollection })),
 }));
-jest.mock('../../libs/log', () => ({ error: jest.fn() }));
-jest.mock('../../libs/cloudwatch', () => ({ trackExecTime: jest.fn().mockImplementation((name, func) => func()) }));
+jest.mock('@kevinwang0316/log', () => ({ error: jest.fn() }));
+jest.mock('@kevinwang0316/cloudwatch', () => ({ trackExecTime: jest.fn().mockImplementation((name, func) => func()) }));
 
 describe('delete-unattached-journal', () => {
   test('Verified user calls', async () => {
@@ -19,9 +19,9 @@ describe('delete-unattached-journal', () => {
       user: { _id: 'id' },
     };
     const callback = jest.fn();
-    const mongodb = require('../../libs/MongoDBHelper');
-    const cloudwatch = require('../../libs/cloudwatch');
-    const log = require('../../libs/log');
+    const mongodb = require('@kevinwang0316/mongodb-helper');
+    const cloudwatch = require('@kevinwang0316/cloudwatch');
+    const log = require('@kevinwang0316/log');
 
     await handler(event, context, callback);
 
@@ -45,9 +45,9 @@ describe('delete-unattached-journal', () => {
       functionName: 'functionName',
     };
     const callback = jest.fn();
-    const cloudwatch = require('../../libs/cloudwatch');
+    const cloudwatch = require('@kevinwang0316/cloudwatch');
     cloudwatch.trackExecTime.mockRejectedValueOnce('Error Message');
-    const log = require('../../libs/log');
+    const log = require('@kevinwang0316/log');
 
     await handler(event, context, callback);
 
