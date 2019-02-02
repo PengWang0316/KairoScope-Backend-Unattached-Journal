@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongodb';
+import { promiseInsertResult, initialConnects, promiseReturnResult } from '@kevinwang0316/mongodb-helper';
 
 import { invokeDeleteUnattachedJournal } from '../helpers/InvokeHelper';
 import initEvns from '../helpers/InitialEnvs';
-import { promiseInsertResult, initialConnects, promiseReturnResult } from '../../libs/MongoDBHelper';
 
 let context;
 let unattachedJournalId;

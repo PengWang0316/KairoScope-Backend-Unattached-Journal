@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
+import { initialConnects, getDB, promiseReturnResult } from '@kevinwang0316/mongodb-helper';
 
 import { invokeCreateJournal } from '../helpers/InvokeHelper';
-import { initialConnects, getDB, promiseReturnResult } from '../../libs/MongoDBHelper';
 import initEvns from '../helpers/InitialEnvs';
 
 let context;
