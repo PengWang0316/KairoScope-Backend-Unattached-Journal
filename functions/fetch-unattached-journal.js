@@ -1,11 +1,11 @@
 'use strict';
 
 const { ObjectId } = require('mongodb');
+const log = require('@kevinwang0316/log');
+const cloudwatch = require('@kevinwang0316/cloudwatch');
+const { promiseNextResult } = require('@kevinwang0316/mongodb-helper');
 
 const wrapper = require('../middlewares/wrapper');
-const { promiseNextResult } = require('../libs/MongoDBHelper');
-const cloudwatch = require('../libs/cloudwatch');
-const log = require('../libs/log');
 
 const { journalEntriesCollectionName } = process.env;
 
