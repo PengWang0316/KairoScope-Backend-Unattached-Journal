@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongodb';
-
 import mongodbHelper from '@kevinwang0316/mongodb-helper';
 import cloudwatch from '@kevinwang0316/cloudwatch';
 import log from '@kevinwang0316/log';
+
 import { handler } from '../../functions/create-journal';
 
 require('../helpers/initailEnvsForUnitTest');
