@@ -49,7 +49,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "jest": "^23.6.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "middy": "^0.20.5",
     "mongo-sanitize": "^1.0.1",
     "mongodb": "^3.1.13",
